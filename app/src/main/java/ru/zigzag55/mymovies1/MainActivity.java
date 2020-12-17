@@ -1,6 +1,8 @@
 package ru.zigzag55.mymovies1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import ru.zigzag55.mymovies1.data.Movie;
 import ru.zigzag55.mymovies1.utils.JSONUtils;
 import ru.zigzag55.mymovies1.utils.NetworkUtils;
@@ -17,31 +19,21 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
+    private RecyclerView recyclerViewPosters;
+    private MovieAdapter movieAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.textView1);
-
-        //getting JSON from internet
-        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(NetworkUtils.POPULARITY, 3);
-
-        //getting array of movies
+        recyclerViewPosters = findViewById(R.id.recyclerViewPosters);
+        recyclerViewPosters.setLayoutManager(new GridLayoutManager(this, 2));
+        movieAdapter = new MovieAdapter();
+        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(NetworkUtils.POPULARITY, 1);
         ArrayList<Movie> movies = JSONUtils.getMoviesFromJSON(jsonObject);
+        movieAdapter.addMovies(movies);
+        recyclerViewPosters.setAdapter(movieAdapter);
 
-        if (jsonObject == null) {
-            Toast.makeText(this, "Null json", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Good json. Elements: " + movies.size(), Toast.LENGTH_LONG).show();
-        }
-
-        StringBuilder builder = new StringBuilder();
-        for (Movie movie: movies) {
-            builder.append(movie.getTitle()).append("\n");
-        }
-        Log.i("MyResult", builder.toString());
-        textView.setText(builder.toString());
     }
 }
