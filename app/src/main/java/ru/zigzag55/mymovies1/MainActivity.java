@@ -53,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Click!" + position, Toast.LENGTH_SHORT).show();
             }
         });
+        movieAdapter.setOnReachEndListener(new MovieAdapter.OnReachEndListener() {
+            @Override
+            public void onReachEnd() {
+                Toast.makeText(MainActivity.this, "End reached", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void setPopularity(View view) {
