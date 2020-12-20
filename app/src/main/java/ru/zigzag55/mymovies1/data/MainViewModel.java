@@ -15,6 +15,9 @@ public class MainViewModel extends AndroidViewModel {
     private static MovieDatabase database;
     private LiveData<List<Movie>> movies;
 
+    public LiveData<List<Movie>> getMovies() {
+        return movies;
+    }
 
     public MainViewModel(@NonNull Application application) {
         super(application);
