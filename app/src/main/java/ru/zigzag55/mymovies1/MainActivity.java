@@ -12,6 +12,7 @@ import ru.zigzag55.mymovies1.data.Movie;
 import ru.zigzag55.mymovies1.utils.JSONUtils;
 import ru.zigzag55.mymovies1.utils.NetworkUtils;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPosterClick(int position) {
                 Toast.makeText(MainActivity.this, "Click!" + position, Toast.LENGTH_SHORT).show();
+                Movie movie = movieAdapter.getMovies().get(position);
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("id", movie.getId());
+                startActivity(intent);
             }
         });
         movieAdapter.setOnReachEndListener(new MovieAdapter.OnReachEndListener() {
