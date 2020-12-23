@@ -1,4 +1,4 @@
-package ru.zigzag55.mymovies1;
+package ru.zigzag55.mymovies1.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import ru.zigzag55.mymovies1.R;
 import ru.zigzag55.mymovies1.data.Movie;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
