@@ -7,4 +7,5 @@
     <string name="removed_from_favorite">Movie removed from Favorite</string>
     <string name="item_main">Main</string>
     <string name="item_favorite">Favorite</string>
+    <string name="run_trailer">run trailer</string>
 </resources>
