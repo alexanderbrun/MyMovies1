@@ -1,10 +1,13 @@
 package ru.zigzag55.mymovies1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.zigzag55.mymovies1.adapters.MovieAdapter;
@@ -26,10 +29,11 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject> {
 
     private Switch switchSort;
     private TextView textViewPopularity;
@@ -38,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private MovieAdapter movieAdapter;
 
     private MainViewModel viewModel;
+
+    private static final int LOADER_ID = 198;
+    private LoaderManager loaderManager;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         //private val viewModel = ViewModelProvider(this).get(SheduleViewModel::class.java)
 //        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        loaderManager = LoaderManager.getInstance(this);
 
         switchSort = findViewById(R.id.switchSort);
         textViewPopularity = findViewById(R.id.textViewPopularity);
@@ -136,13 +144,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void downloadData(int methodOfSort, int page) {
-        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(methodOfSort, page);
-        ArrayList<Movie> movies = JSONUtils.getMoviesFromJSON(jsonObject);
+//        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(methodOfSort, page);
+//        ArrayList<Movie> movies = JSONUtils.getMoviesFromJSON(jsonObject);
+//        if(movies != null && !movies.isEmpty()) {
+//            viewModel.deleteAllMovies();
+//            for (Movie movie : movies) {
+//                viewModel.insertMovie(movie);
+//            }
+//        }
+        URL url = NetworkUtils.buildURL(methodOfSort, page);
+        Bundle bundle = new Bundle();
+        bundle.putString("url", url.toString());
+        loaderManager.restartLoader(LOADER_ID, bundle, this);
+    }
+
+    @NonNull
+    @Override
+    public Loader<JSONObject> onCreateLoader(int id, @Nullable Bundle args) {
+        NetworkUtils.JSONLoader jsonLoader = new NetworkUtils.JSONLoader(this, args);
+        return jsonLoader;
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<JSONObject> loader, JSONObject data) {
+        ArrayList<Movie> movies = JSONUtils.getMoviesFromJSON(data);
         if(movies != null && !movies.isEmpty()) {
             viewModel.deleteAllMovies();
             for (Movie movie : movies) {
                 viewModel.insertMovie(movie);
             }
         }
+        loaderManager.destroyLoader(LOADER_ID);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<JSONObject> loader) {
+
     }
 }
