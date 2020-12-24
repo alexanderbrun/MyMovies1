@@ -41,6 +41,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.onReachEndListener = onReachEndListener;
     }
 
+    public void clear() {
+        this.movies.clear();
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,7 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        if (position > movies.size() - 4 && onReachEndListener != null) { // data loading starting when 4 elements left
+        if (movies.size() >= 20 && position > movies.size() - 4 && onReachEndListener != null) { // data loading starting when 4 elements left
             onReachEndListener.onReachEnd();
         }
         Movie movie = movies.get(position);
