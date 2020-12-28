@@ -3,7 +3,6 @@ package ru.zigzag55.mymovies1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.zigzag55.mymovies1.adapters.ReviewAdapter;
@@ -99,9 +98,10 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             finish();
         }
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+//        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         movie = viewModel.getMovieById(id);
-        Picasso.get().load(movie.getBigPosterPath()).into(imageViewBigPoster);
+        Picasso.get().load(movie.getBigPosterPath()).placeholder(R.drawable.background_placeholder).into(imageViewBigPoster);
         textViewTitle.setText(movie.getTitle());
         textViewOriginalTitle.setText(movie.getOriginalTitle());
         textViewRating.setText(Double.toString(movie.getVoteAverage()));
@@ -149,7 +149,7 @@ public class DetailActivity extends AppCompatActivity {
         if (favoriteMovie != null) {
             imageViewAddToFavorite.setImageResource(R.drawable.remove_from_favorite);
         } else {
-            imageViewAddToFavorite.setImageResource(R.drawable.add_to_favorite);
+            imageViewAddToFavorite.setImageResource(R.drawable.add_grey);
         }
     }
 }

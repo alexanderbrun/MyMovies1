@@ -76,7 +76,6 @@ public class FavoriteActivity extends AppCompatActivity {
         adapter.setOnPosterClickListener(new MovieAdapter.OnPosterClickListener() {
             @Override
             public void onPosterClick(int position) {
-                Toast.makeText(FavoriteActivity.this, "Click!" + position, Toast.LENGTH_SHORT).show();
                 Movie movie = adapter.getMovies().get(position);
                 Intent intent = new Intent(FavoriteActivity.this, DetailActivity.class);
                 intent.putExtra("id", movie.getId());

@@ -8,4 +8,9 @@
     <string name="item_main">Main</string>
     <string name="item_favorite">Favorite</string>
     <string name="run_trailer">run trailer</string>
+    <string name="trailers_label">Trailers</string>
+    <string name="rating">Rating</string>
+    <string name="original_title">Original title:</string>
+    <string name="release_date">Release date</string>
+    <string name="reviews">Reviews</string>
 </resources>
