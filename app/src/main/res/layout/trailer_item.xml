@@ -19,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/youtube"
-            android:contentDescription="@string/run_trailer" />
+            android:contentDescription="@string/launch_trailer" />
 
         <TextView
             android:id="@+id/textViewNameOfVideo"
@@ -30,7 +30,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="8dp"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

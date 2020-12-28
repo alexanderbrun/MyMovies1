@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyMovies1</string>
+    <string name="film_poster">Постер фильма</string>
+    <string name="most_popular">Популярные</string>
+    <string name="top_rated">Рейтинговые</string>
+    <string name="add_to_favorite">Фильм добавлен в Избранное</string>
+    <string name="removed_from_favorite">Фильм удален из Избранного</string>
+    <string name="trailers_label">Трейлеры</string>
+    <string name="rating">Рейтинг</string>
+    <string name="original_title">Оригинальное название</string>
+    <string name="release_date">Дата выхода</string>
+    <string name="reviews">Рецензии (tmdb.org)</string>
+    <string name="item_main">Главная</string>
+    <string name="item_favorite">Избранное</string>
+    <string name="launch_trailer">Открыть трейлер</string>
+</resources>
