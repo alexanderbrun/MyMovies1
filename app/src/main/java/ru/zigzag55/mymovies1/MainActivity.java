@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject> {
 
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static int methodOfSort;
     private static boolean isLoading = false;
 
+    private static String lang;
+
     private int getColumnCount() {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        lang = Locale.getDefault().getLanguage();
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         loaderManager = LoaderManager.getInstance(this);
 
@@ -166,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 //                viewModel.insertMovie(movie);
 //            }
 //        }
-        URL url = NetworkUtils.buildURL(methodOfSort, page);
+        URL url = NetworkUtils.buildURL(methodOfSort, page, lang);
         Bundle bundle = new Bundle();
         bundle.putString("url", url.toString());
         loaderManager.restartLoader(LOADER_ID, bundle, this);
