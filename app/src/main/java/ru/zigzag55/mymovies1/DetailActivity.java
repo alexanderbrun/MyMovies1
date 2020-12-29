@@ -18,6 +18,7 @@ import ru.zigzag55.mymovies1.utils.NetworkUtils;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -104,7 +105,7 @@ public class DetailActivity extends AppCompatActivity {
             finish();
         }
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        movie = viewModel.getMovieById(id);
+        movie = viewModel.getFavoriteMovieById(id);
         Picasso.get().load(movie.getBigPosterPath()).placeholder(R.drawable.background_placeholder).into(imageViewBigPoster);
         textViewTitle.setText(movie.getTitle());
         textViewOriginalTitle.setText(movie.getOriginalTitle());

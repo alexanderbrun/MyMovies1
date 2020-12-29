@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyMovies1</string>
+    <string name="app_name">My movies database</string>
     <string name="film_poster">Film poster</string>
     <string name="most_popular">Most popular</string>
     <string name="top_rated">Top rated</string>
@@ -14,4 +14,5 @@
     <string name="release_date">Release date</string>
     <string name="reviews">Reviews</string>
     <string name="description">Description</string>
+    <string name="title">Title</string>
 </resources>

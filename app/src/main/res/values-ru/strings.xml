@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyMovies1</string>
+    <string name="app_name">Мои любимые фильмы</string>
     <string name="film_poster">Постер фильма</string>
     <string name="most_popular">Популярные</string>
     <string name="top_rated">Рейтинговые</string>
@@ -15,4 +15,5 @@
     <string name="item_favorite">Избранное</string>
     <string name="launch_trailer">Открыть трейлер</string>
     <string name="description">Описание</string>
+    <string name="title">Название</string>
 </resources>
