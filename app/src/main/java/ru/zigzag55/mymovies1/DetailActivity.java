@@ -47,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
     private ScrollView scrollViewInfo;
 
     private int id;
+    private String table;
     private MainViewModel viewModel;
     private Movie movie;
     private FavoriteMovie favoriteMovie;
@@ -99,13 +100,22 @@ public class DetailActivity extends AppCompatActivity {
         scrollViewInfo = findViewById(R.id.scrollViewInfo);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("id")) {
+        if (intent != null && intent.hasExtra("id") && intent.hasExtra("db_table")) {
+            viewModel = new ViewModelProvider(this).get(MainViewModel.class);
             id = intent.getIntExtra("id", -1);
+            table = intent.getStringExtra("db_table");
+            switch (table) {
+                case "movies":
+                    movie = viewModel.getMovieById(id);
+                    break;
+                case "favorite_movies":
+                    movie = viewModel.getFavoriteMovieById(id);
+                    break;
+            }
         } else {
             finish();
         }
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        movie = viewModel.getFavoriteMovieById(id);
+
         Picasso.get().load(movie.getBigPosterPath()).placeholder(R.drawable.background_placeholder).into(imageViewBigPoster);
         textViewTitle.setText(movie.getTitle());
         textViewOriginalTitle.setText(movie.getOriginalTitle());
